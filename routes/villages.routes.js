@@ -130,6 +130,7 @@ router.get('/:village_id/houses', (req, res) => {
 
     House
         .find({ village: village_id })
+        .populate('village')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
