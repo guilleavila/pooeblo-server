@@ -17,8 +17,10 @@ router.get("/", (req, res) => {
 })
 
 
-// --- CREATE HOUSE ROUTE 
-router.post("/create", (req, res) => {
+// --- CREATE HOUSE ROUTE AND CREATE OWNER SUBSCRIPTION
+router.post("/create", isAuthenticated, (req, res) => {
+
+    const userId = req.payload._id
 
     const { name, description, priceDay, services, roomsDescription, maxGuests, images, availableDaysLeft, lat, lng, village, street, owner } = req.body
 
@@ -29,6 +31,9 @@ router.post("/create", (req, res) => {
 
     House
         .create({ name, description, priceDay, services, roomsDescription, maxGuests, images, availableDaysLeft, location, village, street, owner })
+        .then(({ _id }) => {
+            return Subscription.create({ coRenter: userId, house: _id, totalDays: 0, totalPrice: 0, daysLeftToBook: 365 })
+        })
         .then(response => res.json(response))
         .catch(err => {
             console.log(err)
