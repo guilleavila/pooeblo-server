@@ -76,11 +76,21 @@ router.put("/:house_id/edit-image", (req, res) => {
     const { house_id } = req.params
     const houseImages = req.body
 
-    console.log('REQBODY -----', req.body)
-    console.log('houseimages -----', houseImages)
-
     House
         .findByIdAndUpdate(house_id, { images: houseImages }, { new: true })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
+
+// --- UPDATE IMAGES
+router.put("/:house_id/upload-images", (req, res) => {
+
+    const { house_id } = req.params
+    const houseImages = req.body
+
+    House
+        .findByIdAndUpdate(house_id, { $addToSet: { images: houseImages } }, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -105,7 +115,7 @@ router.put('/:house_id/add-to-fav', isAuthenticated, (req, res) => {
     const { _id } = req.payload
 
     User
-        .findByIdAndUpdate(_id, { $addToSet: { favHouses: house_id } })
+        .findByIdAndUpdate(_id, { $addToSet: { favHouses: house_id } }, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

@@ -34,9 +34,9 @@ router.get('/findOneVillage/:village_id', (req, res) => {
 
 // PUT --- EDIT VILLAGE INFO
 
-router.put('/:village_id/edit-info', (req, res) => {
+router.put('/edit-info', isAuthenticated, (req, res) => {
 
-    const { village_id } = req.params
+    const { _id } = req.payload
     const { name, phoneNumber, CCAA, province, profileImg, description, website, lat, lng } = req.body
 
     const location = {
@@ -45,7 +45,21 @@ router.put('/:village_id/edit-info', (req, res) => {
     }
 
     Village
-        .findByIdAndUpdate(village_id, { name, phoneNumber, CCAA, province, profileImg, description, website, location }, { new: true })
+        .findByIdAndUpdate(_id, { name, phoneNumber, CCAA, province, profileImg, description, website, location }, { new: true })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
+
+// PUT --- EDIT VILLAGE IMAGE
+
+router.put('/edit-image', isAuthenticated, (req, res) => {
+
+    const { _id } = req.payload
+    const { profileImg } = req.body
+
+    Village
+        .findByIdAndUpdate(_id, { profileImg }, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
