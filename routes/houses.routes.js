@@ -84,7 +84,7 @@ router.put("/:house_id/edit-image", (req, res) => {
     House
         .findByIdAndUpdate(house_id, { images: houseImages }, { new: true })
         .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+        .catch(err => console.log(err))
 })
 
 
