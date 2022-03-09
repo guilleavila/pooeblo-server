@@ -2,6 +2,7 @@ const router = require('express').Router()
 
 const { isAuthenticated } = require('../middlewares/jwt.middleware')
 const Post = require('../models/Post.model')
+const User = require('../models/User.model')
 
 
 // --- CREATE POST ROUTE 
@@ -26,6 +27,7 @@ router.get("/", (req, res) => {
 
     Post
         .find()
+        .populate('creator')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -42,6 +44,23 @@ router.get("/get-villagge-posts/:village_id", (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
+
+// --- GET ALL POSTS OF YOUR FOLLOWED VILLAGES
+router.get("/get-followed-villages-posts", isAuthenticated, (req, res) => {
+
+    const { _id } = req.payload
+
+    User
+        .findById(_id)
+        .select('followedVillages')
+        .then(response => {
+
+            let followersPosts = response.followedVillages.map(elm => Post.find({ creator: elm._id }))
+            return Promise.all(followersPosts)
+        })
+        .then((response) => res.json(response.flat()))
+        .catch(err => res.status(500).json(err))
+})
 
 
 // --- POST DETAILS ROUTE
