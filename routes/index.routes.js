@@ -6,6 +6,7 @@ router.use('/villages', require('./villages.routes'))
 router.use('/subscriptions', require('./subscriptions.routes'))
 router.use("/houses", require('./houses.routes'))
 router.use("/bookings", require('./bookings.routes'))
+router.use("/posts", require('./posts.routes'))
 router.use("/upload", require('./upload.routes'))
 router.use("/stripe", require('./stripe.routes'))
 

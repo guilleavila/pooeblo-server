@@ -145,11 +145,12 @@ router.get('/:house_id/get-all-bookings', (req, res) => {
 
     const { house_id } = req.params
 
+
     Subscription
         .find({ house: house_id })
         .then(foundSubscriptions => {
 
-            let bookings = foundSubscriptions.map(elm => Booking.find({ subscription: elm._id }))
+            let bookings = foundSubscriptions.map(elm => Booking.find({ subscription: elm._id }).populate('subscription').populate({ path: 'subscription', populate: [{ path: 'coRenter' }] }))
 
             return Promise.all(bookings)
         })
