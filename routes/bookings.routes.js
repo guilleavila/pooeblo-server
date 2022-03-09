@@ -34,6 +34,7 @@ router.get("/:booking_id", (req, res) => {
 
     Booking
         .findById(booking_id)
+        .populate('subscription')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
