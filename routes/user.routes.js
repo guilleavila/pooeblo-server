@@ -28,10 +28,22 @@ router.get('/', isAuthenticated, (req, res) => {
 router.put('/edit', isAuthenticated, (req, res) => {
 
     const { _id } = req.payload
-    const { firstName, lastName, email, phoneNumber, birthDate, profileImg } = req.body
+    const { firstName, lastName, phoneNumber, birthDate } = req.body
 
     User
-        .findByIdAndUpdate(_id, { firstName, lastName, email, phoneNumber, birthDate, profileImg })
+        .findByIdAndUpdate(_id, { firstName, lastName, phoneNumber, birthDate }, { new: true })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
+// --- EDIT USER IMAGE
+router.put('/edit-image', isAuthenticated, (req, res) => {
+
+    const { _id } = req.payload
+    const { profileImg } = req.body
+
+    User
+        .findByIdAndUpdate(_id, { profileImg }, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

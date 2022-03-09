@@ -92,12 +92,21 @@ router.put("/:house_id/edit-image", (req, res) => {
 router.put("/:house_id/upload-images", (req, res) => {
 
     const { house_id } = req.params
-    const houseImages = req.body
+    const houseImages = req.body.images
 
     House
-        .findByIdAndUpdate(house_id, { $addToSet: { images: houseImages } }, { new: true })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+        .findByIdAndUpdate(house_id, { $addToSet: { images: { $each: houseImages } } }, { new: true })
+        .then(response => {
+            console.log('LO QUE ME LLEGA ------------->', houseImages)
+            console.log('LA RESPONSE ------------->', response)
+            res.json(response)
+        })
+        .catch(err => {
+            console.log('EL ERROR ------------>', err)
+            res.status(500).json(err)
+        })
+
+
 })
 
 
