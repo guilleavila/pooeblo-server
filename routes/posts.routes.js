@@ -12,8 +12,12 @@ router.post("/create", isAuthenticated, (req, res) => {
 
     Post
         .create({ image, content, likes: 0, creator: _id })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+        .then(response => {
+            res.json(response)
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
 })
 
 
