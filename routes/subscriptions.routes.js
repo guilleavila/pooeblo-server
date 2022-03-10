@@ -23,13 +23,24 @@ router.get('/my-subscription', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
+// GET - GET ONE SUBSCRIPTION
+router.get('/:subscription_id', (req, res) => {
+
+    const { subscription_id } = req.params
+
+    Subscription
+        .findById(subscription_id)
+        .populate('house')
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
 
 // POST --- CREATE SUBSCRIPTION
 router.post('/create', isAuthenticated, (req, res) => {
 
     // el corenter y la house no salen de ahí
     const { house, totalDays } = req.body
-    const {_id} = req.payload
+    const { _id } = req.payload
 
     House
         .findById(house)

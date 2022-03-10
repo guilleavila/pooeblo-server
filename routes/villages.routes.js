@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
 
     Village
         .find()
+        .sort({ name: 1 })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -166,6 +167,7 @@ router.get('/search-village-by-name/:input_text', (req, res) => {
 
     Village
         .find({ name: { $regex: input_text, $options: 'i' } })
+        .sort({ name: 1 })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
