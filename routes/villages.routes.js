@@ -172,30 +172,6 @@ router.get('/search-village-by-name/:input_text', (req, res) => {
 
 
 // GET --- GET ALL PROVINCES
-// router.get('/provinces/:input_text', (req, res) => {
-
-//     const provinces = []
-//     const { input_text } = req.params 
-
-//     Village
-//         .find()
-//         .select('province')
-//         .then(response => {
-
-
-
-//             let filteredProvinces = [...new Set(response)]
-//             filteredProvinces
-//                 .filter((eachProvince) => eachProvince.toLowerCase().includes(input_text))
-//                 .map(eachProvince => eachProvince[0].toUpperCase() + eachProvince.substring(1))
-
-//             console.log(filteredProvinces)
-//             res.json(filteredProvinces)
-//         })
-//         .catch(err => res.status(500).json(err))
-// })
-
-
 router.get('/provinces/:input_text', (req, res) => {
 
     const provinces = []

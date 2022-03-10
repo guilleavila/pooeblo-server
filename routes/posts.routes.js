@@ -45,6 +45,18 @@ router.get("/get-villagge-posts/:village_id", (req, res) => {
 })
 
 
+// --- GET ALL YOUR POSTS
+router.get("/get-my-posts", isAuthenticated, (req, res) => {
+
+    const { _id } = req.payload
+
+    Post
+        .find({ creator: _id })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
+
 // --- GET ALL POSTS OF YOUR FOLLOWED VILLAGES
 router.get("/get-followed-villages-posts", isAuthenticated, (req, res) => {
 
