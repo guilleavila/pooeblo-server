@@ -1,8 +1,10 @@
 const router = require('express').Router()
 
 const { Router } = require('express')
+const { isAuthenticated } = require('../middlewares/jwt.middleware')
 const Booking = require('../models/Booking.model')
 const Subscription = require('../models/Subscription.model')
+const User = require('../models/User.model')
 
 
 // --- CREATE BOOKING ROUTE 
@@ -101,6 +103,23 @@ router.delete("/:booking_id/delete", (req, res) => {
             return Subscription.findByIdAndUpdate(deletedBooking.subscription, { $inc: { daysLeftToBook: totalDays } }, { new: true })
         })
         .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
+
+// --- GET ALL MY BOOKINGS
+router.get("/get-all-my-bookings", isAuthenticated, (req, res) => {
+
+    const { _id } = req.payload
+
+    Subscription
+        .find({ coRenter: _id })
+        .then(foundSubscriptions => {
+
+            let bookings = foundSubscriptions.map(elm => Booking.find({ subscription: elm._id }).populate('subscription').populate({ path: 'subscription', populate: [{ path: 'coRenter' }] }))
+            return Promise.all(bookings)
+        })
+        .then((response) => res.json(response.flat()))
         .catch(err => res.status(500).json(err))
 })
 
