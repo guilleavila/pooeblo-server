@@ -108,19 +108,25 @@ router.delete("/:booking_id/delete", (req, res) => {
 
 
 // --- GET ALL MY BOOKINGS
-router.get("/get-all-my-bookings", isAuthenticated, (req, res) => {
+router.get("/get-all-my-bookings/:user_id", isAuthenticated, (req, res) => {
 
-    const { _id } = req.payload
+    const { user_id } = req.params
 
     Subscription
-        .find({ coRenter: _id })
+        .find({ coRenter: user_id })
         .then(foundSubscriptions => {
+            console.log('Las subs ---->', foundSubscriptions)
 
-            let bookings = foundSubscriptions.map(elm => Booking.find({ subscription: elm._id }).populate('subscription').populate({ path: 'subscription', populate: [{ path: 'coRenter' }] }))
+            let bookings = foundSubscriptions.map(elm => Booking.find({ subscription: elm._id }).populate('subscription').populate({ path: 'subscription', populate: [{ path: 'house' }] }))
             return Promise.all(bookings)
         })
-        .then((response) => res.json(response.flat()))
-        .catch(err => res.status(500).json(err))
+        .then((response) => {
+            res.json(response.flat())
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
 })
 
 module.exports = router
