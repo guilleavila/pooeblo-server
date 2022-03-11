@@ -61,11 +61,11 @@ router.post('/user-signup', (req, res, next) => {
 // --- VILLAGE SIGNUP ROUTE
 router.post('/village-signup', (req, res, next) => {
 
-    const { name, lat, lng, email, password, phoneNumber, CCAA, province } = req.body
+    const { name, latitude, longitude, email, password, phoneNumber, CCAA, province } = req.body
 
     const location = {
         type: 'Point',
-        coordinates: [lat, lng]
+        coordinates: [latitude, longitude]
     }
 
     if (email === '' || password === '' || name === '' || CCAA === '' || province === '') {
@@ -97,9 +97,9 @@ router.post('/village-signup', (req, res, next) => {
             return Village.create({ name, location, email, password: hashedPassword, phoneNumber, CCAA, province })
         })
         .then((createdVillage) => {
-            const { name, lat, lng, email, phoneNumber, CCAA, province, _id } = createdVillage
+            const { name, latitude, longitude, email, phoneNumber, CCAA, province, _id } = createdVillage
 
-            const village = { name, lat, lng, email, phoneNumber, CCAA, province, _id }
+            const village = { name, latitude, longitude, email, phoneNumber, CCAA, province, _id }
 
             res.status(201).json({ village })
         })
