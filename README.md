@@ -23,7 +23,7 @@ are managed individually and independently from the creation of the subscription
 Users can also publish their houses so that other users can subscribe and create bookings.
 
 
-![github-small](https://user-images.githubusercontent.com/69345715/188492432-605d75d8-58c4-402d-8698-2bd6c32919da.png)
+![app-screenshoot](https://user-images.githubusercontent.com/69345715/188492432-605d75d8-58c4-402d-8698-2bd6c32919da.png)
 
 ## Demo
 
@@ -175,7 +175,7 @@ Javascript (ES6), HTML5, CSS3
 
 ## CLIENT
 
-[Pooeblo-Server](https://github.com/guilleavila/pooeblo-client)
+[Pooeblo-Client](https://github.com/guilleavila/pooeblo-client)
 
 ## Authors
 
