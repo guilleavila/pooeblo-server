@@ -2,6 +2,7 @@
 # Pooeblo
 
 ![App Screenshot](https://user-images.githubusercontent.com/69345715/188492140-f6ad62f6-2afc-48dc-8fa8-8501f35b4b90.png)
+![](https://media.giphy.com/media/w5GPJlLqBEQVC38y6C/giphy.gif)
 
 Pooeblo is our final project of the Ironhack web development bootcamp. 
 It is a SPA (Single Page Application) created with React, which consumes its data from a REST API (mongoDB) 
