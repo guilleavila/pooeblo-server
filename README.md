@@ -179,15 +179,15 @@ Javascript (ES6), HTML5, CSS3
 
 ## Authors
 
-- Inés García Periáñez - [@inesgarper](https://www.github.com/octokatherine)
-- Guillermo Ávila Ayllón - [@guilleavila](https://www.github.com/octokatherine)
+- Inés García Periáñez - [@inesgarper](https://www.github.com/inesgarper)
+- Guillermo Ávila Ayllón - [@guilleavila](https://www.github.com/guilleavila)
 
 
 ## 🔗 Links
-Inés García Periáñez
+Guillermo Ávila Ayylón 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/guillermo-%C3%A1vila/)
 
-Guillermo Ávila Ayylón 
+Inés García Periáñez
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/inesgarper/)
 
 
