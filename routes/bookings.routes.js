@@ -69,22 +69,6 @@ router.put('/:booking_id/edit', (req, res) => {
         .then((updatedBooking) => {
             return Subscription.findByIdAndUpdate(updatedBooking.subscription, { $inc: { daysLeftToBook: -totalDays } }, { new: true })
         })
-
-    // .then(foundBooking => {  // guardamos fechas originales
-    //     const { originalEntry, originalExit } = foundBooking
-    //     const originalTotalDays = (originalExit - originalEntry) / (1000 * 3600 * 24)
-
-    //     return Promise.all([
-    //         Subscription.findByIdAndUpdate(foundBooking.subscription, { $inc: { daysLeftToBook: originalTotalDays } }, { new: true }),
-    //         Booking.findByIdAndUpdate(booking_id, { entryDate, exitDate })
-    //     ])
-    // })
-    // .then(([, updatedBooking]) => {
-    //     return Subscription.findByIdAndUpdate(updatedBooking.subscription, { $inc: { daysLeftToBook: -totalDays } }, { new: true })
-    // })
-
-
-
 })
 
 // --- BOOKING DELETE ROUTE
